@@ -35,10 +35,13 @@ st.title('Iris Classifier')
 st.write('## Input Value')
 
 # インプットデータ（1行のデータフレーム）
-value_df = pd.DataFrame([], columns=['data', 'sepal length(cm)', 'petal length(cm)'])
-record = pd.Series(['data', sepalValue, petalValue], index=value_df.columns)
-value_df = value_df.append(record, ignore_index=True)
-value_df.set_index('data', inplace=True)
+value_df = pd.DataFrame([], columns=['sepal length (cm)', 'petal length (cm)'])
+
+# 新しい行を含む DataFrame を作成
+new_record = pd.DataFrame([[sepalValue, petalValue]], columns=value_df.columns)
+
+# value_df と新しい DataFrame を連結して新しい DataFrame を作成
+value_df = pd.concat([value_df, new_record], ignore_index=True)
 
 # 入力値の値
 st.write(value_df)
